@@ -1,0 +1,16 @@
+{
+    "name": "Twilio Notifications App POC",
+    "description": "Nothing to see here",
+    "repository": "https://github.com/ricardotwilio/heroku-poc",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "keywords": ["node", "express", "static"],
+    "env": {
+        "ACCOUNT_SID": {
+          "description": "Your Twilio's Account Sid."
+        },
+        "AUTH_TOKEN": {
+          "description": "Your Twilio's Auth Token.",
+          "required": true
+        }
+      }
+  }
