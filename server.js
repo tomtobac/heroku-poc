@@ -5,4 +5,6 @@ app.get('/', (req, res) => {
     res.send('An alligator approaches!');
 });
 
-app.listen(8080, () => console.log('Gator app listening on port 8080!'));
+const port  = process.env.PORT || 8080;
+
+app.listen(port, () => console.log(`Gator app listening on port ${port}!`));
