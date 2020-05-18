@@ -2,7 +2,7 @@
     "name": "Twilio Notifications App POC",
     "description": "Nothing to see here",
     "repository": "https://github.com/ricardotwilio/heroku-poc",
-    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "logo": "https://cdn.worldvectorlogo.com/logos/twilio.svg",
     "keywords": ["node", "express", "static"],
     "env": {
         "ACCOUNT_SID": {
