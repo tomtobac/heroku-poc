@@ -10,6 +10,6 @@
   };
   
   const passCode = generateRandomPasscode();
-  const location = `https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fricardotwilio%2Fheroku-poc&template=https%3A%2F%2Fgithub.com%2Fricardotwilio%2Fheroku-poc&&env[PASSCODE]=${passCode}`
-  window.location = location;
+  const newLocation = `https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fricardotwilio%2Fheroku-poc&template=https%3A%2F%2Fgithub.com%2Fricardotwilio%2Fheroku-poc&&env[PASSCODE]=${passCode}`
+  window.location = newLocation;
 </script>
