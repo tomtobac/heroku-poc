@@ -7,7 +7,6 @@
     "env": {
       "PASSCODE": {
         "description": "A secret key for verifying the integrity of signed cookies.",
-        "generator": "secret"
       },
         "ACCOUNT_SID": {
           "description": "Your Twilio's Account Sid."
