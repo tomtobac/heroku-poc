@@ -1,5 +1,15 @@
 <div>Hello</div>
 
 <script>
-  window.location = 'http://www.google.com';
+  
+  const generateRandomPasscode = () => {
+    return new Array(10)
+      .fill(null)
+      .map(() => Math.floor(Math.random() * 9))
+      .join('');
+  };
+  
+  const passCode = generateRandomPasscode();
+  const location = `https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fricardotwilio%2Fheroku-poc&template=https%3A%2F%2Fgithub.com%2Fricardotwilio%2Fheroku-poc&&env[PASSCODE]=${passCode}`
+  window.location = location;
 </script>
