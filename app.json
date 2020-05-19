@@ -1,19 +1,23 @@
 {
-    "name": "Twilio Notifications App POC",
-    "description": "Nothing to see here",
-    "repository": "https://github.com/ricardotwilio/heroku-poc",
-    "logo": "https://cdn.worldvectorlogo.com/logos/twilio.svg",
-    "keywords": ["node", "express", "static"],
-    "env": {
-      "PASSCODE": {
-        "description": "A secret key for verifying the integrity of signed cookies.",
-      },
-        "ACCOUNT_SID": {
-          "description": "Your Twilio's Account Sid."
-        },
-        "AUTH_TOKEN": {
-          "description": "Your Twilio's Auth Token.",
-          "required": true
-        }
-      }
+  "name": "Twilio Notifications App POC",
+  "description": "Nothing to see here",
+  "repository": "https://github.com/ricardotwilio/heroku-poc",
+  "logo": "https://cdn.worldvectorlogo.com/logos/twilio.svg",
+  "keywords": [
+    "node",
+    "express",
+    "static"
+  ],
+  "env": {
+    "PASSCODE": {
+      "description": "Save this PASSCODE, you will need it to log in the Application."
+    },
+    "ACCOUNT_SID": {
+      "description": "Your Twilio's Account Sid."
+    },
+    "AUTH_TOKEN": {
+      "description": "Your Twilio's Auth Token.",
+      "required": true
+    }
   }
+}
