@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-
-    res.json({ env: process.env, req, res })
+    res.json({ domain: req.domain, headers: req.headers, env: process.env });
 });
 
 const port  = process.env.PORT || 8080;
