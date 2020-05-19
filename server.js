@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('An alligator approaches!');
+
+    res.json({ env: process.env, req, res })
 });
 
 const port  = process.env.PORT || 8080;
