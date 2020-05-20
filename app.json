@@ -8,11 +8,7 @@
     "express",
     "static"
   ],
-  "addons": [
-    {
-      "plan": "heroku-postgresql"
-    }
-  ],
+  "image": "mongo-express",
   "env": {
     "PASSCODE": {
       "description": "Save this PASSCODE, you will need it to log in the Application."

@@ -8,6 +8,7 @@
     "express-favicon": "^2.0.1",
     "heroku-builds": "0.0.29",
     "kerberos": "~0.0.x",
+    "mongodb": "^3.5.7",
     "parse": "~1.8.0",
     "parse-server": "*",
     "path": "^0.12.7",
