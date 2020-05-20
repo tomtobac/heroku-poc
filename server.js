@@ -8,19 +8,6 @@ const client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
 const express = require('express');
 const app = express();
 
-  
-const { MongoClient } = require('mongodb')
-
-const connectionUrl = 'mongodb://localhost:27017'
-const dbName = 'store';
-
-app.get('/db', (req, res) => {
-    MongoClient.connect(connectionUrl, { useNewUrlParser: true }).then((client) => {
-        db = client.db(dbName);
-        res.json({ client });
-      });
-});
-
 app.get('/call', async (req, res) => {
     const response = await client.calls.create({
         twiml: '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello World</Say></Response>',

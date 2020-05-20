@@ -8,7 +8,9 @@
     "express",
     "static"
   ],
-  "image": "mongo-express",
+  "addons": [
+    "mongolab:sandbox"
+  ],
   "env": {
     "PASSCODE": {
       "description": "Save this PASSCODE, you will need it to log in the Application."
