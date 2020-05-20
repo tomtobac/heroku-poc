@@ -1,63 +1,51 @@
-/* ===========================================================================
-let fs = require('fs');
-let uuid = require('uuid/v4');
-let os = require('os');
-let path = require('path');
+const express = require("express");
+const { default: ParseServer, ParseGraphQLServer } = require("parse-server");
+const Parse = require("parse/node");
+const path = require("path");
+const app = express();
 
-const { call: tar } = require('heroku-builds/lib/node_tar');
+const port = 1337;
+const appId = "myAppId";
+const serverURL = "http://localhost:1337/parse";
 
+Parse.initialize(appId);
+Parse.serverURL = serverURL;
 
-(() => {
-    const filePath = path.join(os.tmpdir(), uuid() + '.tar.gz');
+const mongodbURI =
+	"mongodb+srv://chunder:JwawCKQhofeLCOPP@cluster0-6auyg.mongodb.net/test?retryWrites=true&w=majority";
+const parseServer = new ParseServer({
+	databaseURI: mongodbURI,
+	cloud: process.env.CLOUD_CODE_MAIN || __dirname + "/cloud/main.js",
+	appId,
+	masterKey: process.env.MASTER_KEY || "",
+	serverURL: serverURL,
+	liveQuery: {
+		classNames: [""],
+	},
+});
 
-    console.log(filePath);
-    
-    // await tar();
-})();
+const parseGraphQLServer = new ParseGraphQLServer(parseServer, {
+	graphQLPath: "/graphql",
+	playgroundPath: "/playground",
+});
 
-=========================================================================== */
-
-const express = require('express');
-const ParseServer = require('parse-server').ParseServer;
-const path = require('path');
-
-const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
-
-if (!databaseUri) {
-  console.log('DATABASE_URI not specified, falling back to localhost.');
-}
-
-const api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || '',
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',
-  liveQuery: {
-    classNames: ["Posts", "Comments"]
+app.get("/", async (req, res) => {
+  const Broadcasts = Parse.Object.extend("Broadcasts");
+  const broadcasts = new Broadcasts();
+  try {
+    const saved = await broadcasts.save({ id: 1, name: 'tomeu' });
+    res.status(200).json(saved);
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
-const app = express();
+app.use("/parse", parseServer.app); // (Optional) Mounts the REST API
+parseGraphQLServer.applyGraphQL(app); // Mounts the GraphQL API
+parseGraphQLServer.applyPlayground(app); // (Optional) Mounts the GraphQL Playground - do NOT use in Production
 
-app.use('/public', express.static(path.join(__dirname, '/public')));
-
-const mountPath = process.env.PARSE_MOUNT || '/parse';
-app.use(mountPath, api);
-
-app.get('/', function(req, res) {
-  res.status(200).send('I dream of being a website.  Please star the parse-server repo on GitHub!');
+app.listen(port, function () {
+	console.log("REST API running on http://localhost:1337/parse");
+	console.log("GraphQL API running on http://localhost:1337/graphql");
+	console.log("GraphQL Playground running on http://localhost:1337/playground");
 });
-
-app.get('/test', function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/test.html'));
-});
-
-const port       = process.env.PORT || 1337;
-const httpServer = require('http').createServer(app);
-
-httpServer.listen(port, function() {
-    console.log('parse-server-example running on port ' + port + '.');
-});
-
-ParseServer.createLiveQueryServer(httpServer);
