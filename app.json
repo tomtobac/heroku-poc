@@ -13,7 +13,7 @@
       "plan": "heroku-postgresql"
     },
     {
-      "plan": "mongolab:shared-single-small",
+      "plan": "mongolab:shared-single-small"
     }
   ],
   "env": {
