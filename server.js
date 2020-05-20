@@ -25,6 +25,10 @@ app.post('/', (req, res) => {
     res.json({ domain: req.domain, headers: req.headers, env: process.env });
 });
 
+app.get('/version', (req, res) => {
+    res.json({ env: process.env });
+});
+
 const port  = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`Gator app listening on port ${port}!`));
