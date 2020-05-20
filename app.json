@@ -11,6 +11,9 @@
   "addons": [
     {
       "plan": "heroku-postgresql"
+    },
+    {
+      "plan": "mongolab:shared-single-small",
     }
   ],
   "env": {
