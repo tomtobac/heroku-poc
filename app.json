@@ -8,6 +8,11 @@
     "express",
     "static"
   ],
+  "addons": [
+    {
+      "plan": "heroku-postgresql"
+    }
+  ],
   "env": {
     "PASSCODE": {
       "description": "Save this PASSCODE, you will need it to log in the Application."
@@ -19,5 +24,5 @@
       "description": "Your Twilio's Auth Token.",
       "required": true
     }
-  }
+  },
 }
