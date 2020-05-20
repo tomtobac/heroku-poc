@@ -8,8 +8,23 @@ const port = 1337;
 const appId = "myAppId";
 const serverURL = "http://localhost:1337/parse";
 
+
+class Broadcasts extends Parse.Object {
+  constructor() {
+    super('Broadcasts')
+  }
+}
+
+class Recipients extends Parse.Object {
+  constructor() {
+    super('Recipients')
+  }
+}
+
 Parse.initialize(appId);
 Parse.serverURL = serverURL;
+Parse.Object.registerSubclass('Broadcasts', Broadcasts);
+Parse.Object.registerSubclass('Recipients', Recipients);
 
 const mongodbURI =
 	"mongodb+srv://chunder:JwawCKQhofeLCOPP@cluster0-6auyg.mongodb.net/test?retryWrites=true&w=majority";
@@ -30,10 +45,16 @@ const parseGraphQLServer = new ParseGraphQLServer(parseServer, {
 });
 
 app.get("/", async (req, res) => {
-  const Broadcasts = Parse.Object.extend("Broadcasts");
   const broadcasts = new Broadcasts();
+  const recipients = new Recipients();
+  broadcasts.set('friendlyName', 'Test 123');
+  broadcasts.set('message', 'This is a test message');
+  broadcasts.set('from', '+4545532312')
+  broadcasts.set('channel', 'voice')
+  recipients.set('recipients', { to: '+34222333222', status: 'completed' })
+  broadcasts.set('recipients', recipients);
   try {
-    const saved = await broadcasts.save({ id: 1, name: 'tomeu' });
+    const saved = await broadcasts.save({ name: 'tomeu' });
     res.status(200).json(saved);
   } catch (error) {
     res.status(500).send(error);
